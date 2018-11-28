@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivia</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Shadows+Into+Light|Waiting+for+the+Sunrise"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.4.0/js/all.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <div class="navbar-item">
+                <div class="pageLogo"><i class="far fa-question-circle"></i> Trivia</div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar" id="rTimerHeader" role="navigation" aria-label="main navigation">
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item rTimerDisplay">
+                    <span id="rTimer">10</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="columns is-centered">
+        <div class="column is-three-fifths">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Question &nbsp; <span id="qNum"></span>
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <span id="qAsked">You READY?</span>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <a class="button is-fullwidth cPossible">A.&nbsp;<span class="qChoice" id="qChoiceA"></span></a>
+                </footer>
+                <footer class="card-footer">
+                    <a class="button is-fullwidth cPossible">B.&nbsp;<span class="qChoice" id="qChoiceB"></span></a>
+                </footer>
+                <footer class="card-footer">
+                    <a class="button is-fullwidth cPossible">C.&nbsp;<span class="qChoice" id="qChoiceC"></span></a>
+                </footer>
+                <footer class="card-footer">
+                    <a class="button is-fullwidth cPossible">D.&nbsp;<span class="qChoice" id="qChoiceD"></span></a>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <div class="modal wrongModal">
+        <div class="modal-background"></div>
+        <div class="modal-card ">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><span id="wrongModalTitle"></span></p>
+            </header>
+            <section class="modal-card-body" id="wrongModalBody">
+                <span id="wrongQuestion"></span>
+                <br>
+                <br>
+                <span id="wrongRightAnswer"></span>
+                <br>
+            </section>
+        </div>
+    </div>
+    <div class="modal resultsModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title"><span id="resultTitle"></span></p>
+            </header>
+            <section class="modal-card-body gResults" id="modal-content">
+                Questions Answered Correctly:&nbsp; <span id="numQCorrect"></span>
+                <br />
+                Questions Answered Incorrectly:&nbsp; <span id="numQIncorrect"></span>
+                <br />
+                Pick your next topic below, and good luck!
+            </section>
+            <footer class="modal-card-foot">
+                <div class="dropdown is-hoverable is-up">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                            <span id="dropdownMenuText">Topics</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-up" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item rTopicSelect" value="animalTrivia">Animals</a>
+                            <a href="#" class="dropdown-item rTopicSelect" value="historyTrivia">History</a>
+                            <a href="#" class="dropdown-item rTopicSelect" value="scienceTrivia">Science</a>
+                        </div>
+                    </div>
+                </div>
+
+            </footer>
+        </div>
+    </div>
+    <div class="modal instructionModal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Trivia Game.</p>
+            </header>
+            <section class="modal-card-body gInstructions" id="modal-content">
+                Answer 10 questions.
+                <br>
+                You only have 10 seconds for each question.
+                <br /> <br />
+                Pick your topic below, and good luck!
+            </section>
+            <footer class="modal-card-foot">
+                <div class="dropdown is-hoverable is-up">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                            <span id="dropdownMenuText">Topics</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-up" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                        <div class="dropdown-content" id="sDropdown">
+                            <a href="#" class="dropdown-item sTopicSelect" id="animalTrivia">Animals</a>
+                            <a href="#" class="dropdown-item sTopicSelect" id="historyTrivia">History</a>
+                            <a href="#" class="dropdown-item sTopicSelect" id="scienceTrivia">Science</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
